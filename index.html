@@ -1,31 +1,260 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-<title>Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{
-background:black;
-color:white;
-text-align:center;
-font-family:Arial;
-padding-top:100px;
-}
-h1{color:yellow;}
-button{
-padding:12px 20px;
-margin:10px;
-}
-</style>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quốc Đạt | Profile Năng Động</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
 
+        /* Hiệu ứng nền chuyển màu liên tục (Dynamic Gradient) */
+        body {
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb, #ffecd2, #fcb69f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #2d3436;
+            line-height: 1.6;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Thanh menu nổi */
+        header {
+            position: fixed;
+            top: 20px; left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 40px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            gap: 30px;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #2d3436;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        header a:hover { color: #ff7675; }
+
+        /* Container chung (Hiệu ứng kính - Glassmorphism) */
+        .container {
+            max-width: 1100px;
+            margin: 100px auto;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255,255,255,0.8);
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, h3 { color: #0984e3; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 40px; position: relative; }
+        
+        /* 1. HERO & INTRO */
+        .hero-layout { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .hero-img {
+            flex: 1; min-width: 300px;
+            border-radius: 50%;
+            border: 8px solid white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            animation: float 4s ease-in-out infinite;
+        }
+        .hero-text { flex: 2; min-width: 300px; }
+        .tag { background: #fd79a8; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; display: inline-block; margin-bottom: 10px; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 3. NĂNG LỰC (Bouncing Cards) */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .skill-box {
+            background: white; padding: 30px 20px; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .skill-box:hover { transform: translateY(-15px) scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .skill-box i { font-size: 3rem; color: #00cec9; margin-bottom: 15px; }
+
+        /* 4. DỰ ÁN CỦA TÔI */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; height: 250px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.2) rotate(3deg); filter: brightness(0.7); }
+        .caption { position: absolute; bottom: 15px; left: 15px; background: rgba(255,255,255,0.9); padding: 8px 15px; border-radius: 10px; font-weight: bold; color: #d63031; }
+
+        /* 5. LIÊN HỆ & BÌNH LUẬN */
+        .contact-wrap { display: flex; gap: 40px; flex-wrap: wrap; }
+        .contact-info, .comment-section { flex: 1; min-width: 300px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .contact-info p { margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; gap: 15px; }
+        .contact-info i { width: 30px; height: 30px; background: #ffeaa7; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #d63031; }
+
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #dfe6e9; border-radius: 10px; outline: none; transition: 0.3s; font-family: 'Quicksand', sans-serif; }
+        input:focus, textarea:focus { border-color: #74b9ff; }
+        button { background: #0984e3; color: white; border: none; padding: 12px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; }
+        button:hover { background: #00cec9; transform: translateY(-3px); }
+
+        .comments-list { margin-top: 20px; max-height: 250px; overflow-y: auto; padding-right: 10px; }
+        .cmt { background: #f1f2f6; padding: 15px; border-radius: 10px; margin-bottom: 10px; animation: slideIn 0.3s ease-out; border-left: 5px solid #fd79a8; }
+        .cmt b { color: #2d3436; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #0984e3; border-radius: 10px; }
+    </style>
+</head>
 <body>
 
-<h1>Xin chào, tôi là Nguyễn Quốc Đạt</h1>
-<p>Đây là website portfolio của tôi</p>
+    <header>
+        <a href="#about">Giới thiệu</a>
+        <a href="#skills">Năng lực</a>
+        <a href="#projects">Dự án</a>
+        <a href="#contact">Liên hệ</a>
+    </header>
 
-<button>Xem dự án</button>
-<button>Liên hệ</button>
+    <div class="container" id="about">
+        <div class="hero-layout">
+            <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=800&q=80" alt="Avatar Đạt" class="hero-img">
+            <div class="hero-text">
+                <span class="tag">Học sinh 11B4 - THPT Tôn Đức Thắng</span>
+                <h1 style="font-size: 3.5rem; margin-bottom: 10px; color: #2d3436;">Nguyễn Quốc Đạt</h1>
+                <p style="font-size: 1.2rem; color: #636e72;">Chào mừng bạn đến với góc nhỏ của mình! Mình là một học sinh yêu thích sự sáng tạo, khám phá thế giới số và luôn mong muốn mang lại năng lượng tích cực cho mọi người xung quanh.</p>
+                <div style="margin-top: 20px;">
+                    <span style="background: #55efc4; color: #000; padding: 5px 10px; border-radius: 8px; font-weight: bold; margin-right: 10px;">🎨 Sáng tạo</span>
+                    <span style="background: #81ecec; color: #000; padding: 5px 10px; border-radius: 8px; font-weight: bold; margin-right: 10px;">💻 Yêu công nghệ</span>
+                    <span style="background: #a29bfe; color: #fff; padding: 5px 10px; border-radius: 8px; font-weight: bold;">🤝 Hòa đồng</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="container" id="skills">
+        <h2 class="section-title">Hộp Kỹ Năng</h2>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Tư duy logic</h3>
+                <p>Nắm bắt vấn đề nhanh và phân tích tốt các môn tự nhiên.</p>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-code"></i>
+                <h3>Tin học</h3>
+                <p>Thích thú với máy tính, phần mềm và thế giới lập trình.</p>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-users"></i>
+                <h3>Làm việc nhóm</h3>
+                <p>Sẵn sàng hỗ trợ các bạn trong chi đoàn 11B4.</p>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-camera-retro"></i>
+                <h3>Ngoại khóa</h3>
+                <p>Thích tham gia các hoạt động nhiếp ảnh, thể thao của trường.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="projects">
+        <h2 class="section-title">Khoảnh Khắc & Hoạt Động</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80" alt="Học tập">
+                <span class="caption">Học Tập Tại Lớp</span>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=800&q=80" alt="Sự kiện trường">
+                <span class="caption">Sự Kiện Trường THPT</span>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1506869640319-ce1a44fbc752?auto=format&fit=crop&w=800&q=80" alt="Bạn bè">
+                <span class="caption">Cùng Tập Thể 11B4</span>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Công nghệ">
+                <span class="caption">Góc Thực Hành Tin Học</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="contact">
+        <h2 class="section-title">Kết Nối Với Mình Nhé!</h2>
+        <div class="contact-wrap">
+            <div class="contact-info">
+                <h3 style="margin-bottom: 20px; color: #2d3436;">Thông Tin Của Đạt</h3>
+                <p><i class="fas fa-envelope"></i> nguyendat310129@gmail.com</p>
+                <p><i class="fas fa-phone-alt"></i> 0346 615 002</p>
+                <p><i class="fas fa-map-marker-alt"></i> Thôn Thanh Mỹ, Xã Tân Định, Tỉnh Khánh Hoà</p>
+                <p><i class="fas fa-school"></i> Lớp 11B4 - THPT Tôn Đức Thắng</p>
+                
+                <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=800&q=80" alt="Contact" style="width: 100%; border-radius: 15px; margin-top: 20px; height: 150px; object-fit: cover;">
+            </div>
+
+            <div class="comment-section">
+                <h3 style="margin-bottom: 20px; color: #2d3436;">Để lại lời nhắn</h3>
+                <input type="text" id="guestName" placeholder="Tên của bạn là gì?">
+                <textarea id="guestMsg" rows="3" placeholder="Ghi vài dòng nhận xét cho Đạt nhé..."></textarea>
+                <button onclick="addMsg()"><i class="fas fa-paper-plane"></i> Gửi Nhận Xét</button>
+                
+                <div class="comments-list" id="msgList">
+                    <div class="cmt">
+                        <b>Cô Giáo Chủ Nhiệm</b><br>
+                        Trang web dễ thương quá Đạt ơi! Tiếp tục phát huy năng lực nhé! 🌟
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Xử lý thêm bình luận sinh động
+        function addMsg() {
+            let name = document.getElementById('guestName').value;
+            let msg = document.getElementById('guestMsg').value;
+            let list = document.getElementById('msgList');
+
+            if(name.trim() !== "" && msg.trim() !== "") {
+                let newCmt = document.createElement('div');
+                newCmt.className = 'cmt';
+                newCmt.innerHTML = `<b>${name}</b><br>${msg}`;
+                
+                // Chèn lên đầu danh sách
+                list.insertBefore(newCmt, list.firstChild);
+
+                // Reset form
+                document.getElementById('guestName').value = '';
+                document.getElementById('guestMsg').value = '';
+            } else {
+                alert("Bạn nhớ nhập tên và nội dung trước khi gửi nha!");
+            }
+        }
+    </script>
 </body>
 </html>
